@@ -6,7 +6,7 @@
   "scripts": {
     "prod": "webpack --mode production",
     "hot": "webpack-dev-server --hot --inline --config=webpack.config-hot.js",
-    "start": "webpack-dev-server --hot --inline --config=webpack.config-hot.js"
+    "start": "webpack-dev-server --hot --inline --config=webpack.config-hot.js --port 9090"
   },
   "author": "",
   "license": "ISC",

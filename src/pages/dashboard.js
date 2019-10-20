@@ -4,33 +4,30 @@ import { useHistory } from "react-router";
 import { Button, Form, Container, Row, Col, Breadcrumb, Modal } from 'react-bootstrap';
 
 export default function Dashboard() {
-
-    const [title, settitle] = useState("");
-    const [name, setname] = useState("");
-    const [show, setshow] = useState(false);
+    const [state,setState]= useState({title:"" , name: "", show:false});
     const history = useHistory();
     const app = useSelector(state => state.app);
     const dashboard = useSelector(state => state.dashboard);
     const dispatch = useDispatch()
 
-    function UpdateShow(value) {
-        setshow(value);
+    function UpdateShow(value) { 
+        setState({...state, show:value});
     }
 
-    function UpdateTitleValue(e) {
-        settitle(e.target.value);
+    function UpdateTitleValue(e) { 
+        setState({...state, title:e.target.value});
     }
 
     function UpdateTitle() {
-        dispatch({ type: "SET_TITLE", title });
+        dispatch({ type: "SET_TITLE", title: state.title });
     }
 
-    function UpdateNameValue(e) {
-        setname(e.target.value);
+    function UpdateNameValue(e) { 
+        setState({...state,name:e.target.value});
     }
 
     function UpdateName() {
-        dispatch({ type: "SET_NAME", name });
+        dispatch({ type: "SET_NAME", name: state.name });
     }
 
     function handleClose() {
@@ -56,7 +53,7 @@ export default function Dashboard() {
                     <Row>
                         <Col><Form.Group controlId="formBasicEmail">
                             <Form.Label>App Title</Form.Label>
-                            <Form.Control type="text" placeholder="Enter New Title" onChange={UpdateTitleValue} value={title} />
+                            <Form.Control type="text" placeholder="Enter New Title" onChange={UpdateTitleValue} value={state.title} />
                             <Form.Text className="text-muted" >
                                 Please set new title.
                             </Form.Text>
@@ -72,7 +69,7 @@ export default function Dashboard() {
                     <Row>
                         <Col><Form.Group controlId="formBasicEmail">
                             <Form.Label>App Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter New Nametle" onChange={UpdateNameValue} value={name} />
+                            <Form.Control type="text" placeholder="Enter New Nametle" onChange={UpdateNameValue} value={state.name} />
                             <Form.Text className="text-muted" >
                                 Please set new name.
                             </Form.Text>
@@ -85,7 +82,7 @@ export default function Dashboard() {
                     </Row>
                 </Form>
             </Container>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={state.show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Security Error</Modal.Title>
                 </Modal.Header>
